@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_6Sem_Lab2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Lab #2 Chukharev 301" Height="450" Width="800">
     <Grid>
-        
+        <WindowsFormsHost HorizontalAlignment="Left" Height="220" Margin="10,10,0,0" VerticalAlignment="Top" Width="540"/>
+        <ListBox HorizontalAlignment="Left" Height="400" Margin="555,10,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True"/>
+        <StackPanel HorizontalAlignment="Left" Height="175" Margin="10,235,0,0" VerticalAlignment="Top" Width="140">
+            <TextBox Height="23" TextWrapping="Wrap" x:Name="pInput" Text=""/>
+            <TextBox Height="23" TextWrapping="Wrap" x:Name="nodeCountInput" Text=""/>
+            <Button Content="Button"/>
+        </StackPanel>
+        <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>
