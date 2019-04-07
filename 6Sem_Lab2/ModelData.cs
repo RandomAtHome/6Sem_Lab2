@@ -9,7 +9,9 @@ namespace _6Sem_Lab2
         static double pMin = 0.0;
         static double pMax = 0.0;
         void F(int n, double p)
-        {}
+        {
+            NodeValues[n] = 1.0 / (NodeCount - 1) * p * n;
+        }
 
         public int NodeCount { get; set; }
         public double Parameter { get; set; }
@@ -48,6 +50,14 @@ namespace _6Sem_Lab2
         {
             NodeCount = node_count;
             Parameter = p;
+            Nodes = new double[node_count];
+            NodeValues = new double[node_count];
+            double step = 1.0 / (node_count - 1);
+            for (int i = 0; i < NodeCount; i++)
+            {
+                Nodes[i] = step * i;
+                F(i, p);
+            }
         }
         public ModelData() {
             Parameter = pMin;

@@ -16,6 +16,10 @@
             <TextBlock Text="{Binding Converter={StaticResource key_ModelDataConverter}}"/>
         </DataTemplate>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static local:MainWindow.AddModelCommand}"
+                    Gesture="Ctrl+Alt+A"/>
+    </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New"
                         Executed="CommandNew_Executed"/>
@@ -55,13 +59,21 @@
             <Button Content="Draw" Command="{x:Static local:MainWindow.DrawCommand}"/>
         </ToolBar>
         <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="220" Margin="10,45,0,0" VerticalAlignment="Top" Width="540">
-            <Charting:Chart x:Name="chart"/>
+            <Charting:Chart x:Name="chart">
+                <Charting:Chart.Legends>
+                    <Charting:Legend Name="notScaledLegend"/>
+                </Charting:Chart.Legends>
+                <Charting:Chart.ChartAreas>
+                    <Charting:ChartArea Name="notScaledArea"/>
+                    <Charting:ChartArea Name="scaledArea"/>
+                </Charting:Chart.ChartAreas>
+            </Charting:Chart>
         </WindowsFormsHost>
         <ListBox x:Name="modelsList" ItemsSource="{Binding}" ItemTemplate="{DynamicResource key_Template}" HorizontalAlignment="Left" Height="365" Margin="555,45,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True"/>
         <StackPanel x:Name="newModelStack" HorizontalAlignment="Left" Height="140" Margin="10,270,0,0" VerticalAlignment="Top" Width="140">
             <TextBox Height="23" TextWrapping="Wrap" x:Name="pInput" Text="{Binding Path=Parameter, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
             <TextBox Height="23" TextWrapping="Wrap" x:Name="nodeCountInput" Text="{Binding Path=NodeCount, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
-            <Button Content="Button" Command="{x:Static local:MainWindow.AddModelCommand}"/>
+            <Button Content="Add new ModelData" Command="{x:Static local:MainWindow.AddModelCommand}"/>
         </StackPanel>
         <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
