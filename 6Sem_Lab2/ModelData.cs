@@ -49,6 +49,9 @@ namespace _6Sem_Lab2
             NodeCount = node_count;
             Parameter = p;
         }
+        public ModelData() {
+            Parameter = pMin;
+        }
 
         public double[] XinBounds(double x1, double x2) => (from node in Nodes
                                                             where x1 < node && node < x2

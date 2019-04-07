@@ -25,5 +25,20 @@ namespace _6Sem_Lab2
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            pInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            nodeCountInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            ModelData dummy_model_ref = FindResource("key_DummyModel") as ModelData;
+            foreach (FrameworkElement child in newModelStack.Children)
+            {
+                if (Validation.GetHasError(child))
+                {
+                    return;
+                }
+            }
+            (Resources["key_ObsModelData"] as ObservableModelData).Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
+        }
     }
 }

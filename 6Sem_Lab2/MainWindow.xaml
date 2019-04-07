@@ -1,21 +1,52 @@
-﻿<Window x:Class="_6Sem_Lab2.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_6Sem_Lab2"
+        xmlns:Charting="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization" x:Class="_6Sem_Lab2.MainWindow"
         mc:Ignorable="d"
-        Title="Lab #2 Chukharev 301" Height="450" Width="800">
+        Title="Lab #2 Chukharev 301" Height="450" Width="800"
+        DataContext="{DynamicResource key_ObsModelData}">
+    <Window.Resources>
+        <local:ObservableModelData x:Key="key_ObsModelData"/>
+        <local:ModelData x:Key="key_DummyModel"/>
+        <local:DataModelConverter x:Key="key_ModelDataConverter"/>
+        <DataTemplate x:Key="key_Template">
+            <TextBlock Text="{Binding Converter={StaticResource key_ModelDataConverter}}"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="220" Margin="10,10,0,0" VerticalAlignment="Top" Width="540"/>
-        <ListBox HorizontalAlignment="Left" Height="400" Margin="555,10,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True"/>
-        <StackPanel HorizontalAlignment="Left" Height="175" Margin="10,235,0,0" VerticalAlignment="Top" Width="140">
-            <TextBox Height="23" TextWrapping="Wrap" x:Name="pInput" Text=""/>
-            <TextBox Height="23" TextWrapping="Wrap" x:Name="nodeCountInput" Text=""/>
-            <Button Content="Button"/>
+        <Menu Height="20" VerticalAlignment="Top">
+            <MenuItem Header="_File" Width="100">
+                <MenuItem Header="_New"/>
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save"/>
+            </MenuItem>
+            <MenuItem x:Name="menuItem" Header="_Edit" Width="100">
+                <MenuItem Header="_Add"/>
+                <MenuItem Header="_Remove"/>
+            </MenuItem>
+            <MenuItem Header="_Draw" Width="100"/>
+        </Menu>
+        <ToolBar Height="25" VerticalAlignment="Top" Margin="0,20,0,0">
+            <Button Content="Open"/>
+            <Button Content="Save"/>
+            <Button Content="Add"/>
+            <Button Content="Remove"/>
+            <Button Content="Draw"/>
+        </ToolBar>
+        <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="220" Margin="10,45,0,0" VerticalAlignment="Top" Width="540">
+            <Charting:Chart x:Name="chart"/>
+        </WindowsFormsHost>
+        <ListBox ItemsSource="{Binding}" ItemTemplate="{DynamicResource key_Template}" HorizontalAlignment="Left" Height="365" Margin="555,45,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True"/>
+        <StackPanel x:Name="newModelStack" HorizontalAlignment="Left" Height="140" Margin="10,270,0,0" VerticalAlignment="Top" Width="140">
+            <TextBox Height="23" TextWrapping="Wrap" x:Name="pInput" Text="{Binding Path=Parameter, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
+            <TextBox Height="23" TextWrapping="Wrap" x:Name="nodeCountInput" Text="{Binding Path=NodeCount, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
+            <Button Content="Button" Click="Button_Click"/>
         </StackPanel>
-        <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
