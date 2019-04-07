@@ -60,12 +60,15 @@
         </ToolBar>
         <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="220" Margin="10,45,0,0" VerticalAlignment="Top" Width="540">
             <Charting:Chart x:Name="chart">
-                <Charting:Chart.Legends>
-                    <Charting:Legend Name="notScaledLegend"/>
-                </Charting:Chart.Legends>
+                <Charting:Chart.Series>
+                    <Charting:Series Color="DarkRed" ChartType="Spline"/>
+                    <Charting:Series Color="DarkGreen" ChartType="Spline"/>
+                    <Charting:Series Color="DarkRed" ChartType="Spline" MarkerStyle="Circle" MarkerSize="5"/>
+                    <Charting:Series Color="DarkGreen" ChartType="Spline" MarkerStyle="Diamond" MarkerSize="5"/>
+                </Charting:Chart.Series>
                 <Charting:Chart.ChartAreas>
-                    <Charting:ChartArea Name="notScaledArea"/>
-                    <Charting:ChartArea Name="scaledArea"/>
+                    <Charting:ChartArea x:Name="notScaledArea"/>
+                    <Charting:ChartArea x:Name="scaledArea"/>
                 </Charting:Chart.ChartAreas>
             </Charting:Chart>
         </WindowsFormsHost>
