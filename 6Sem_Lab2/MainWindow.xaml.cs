@@ -21,9 +21,11 @@ namespace _6Sem_Lab2
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableModelData modelDatas = null;
         public MainWindow()
         {
             InitializeComponent();
+            modelDatas = FindResource("key_ObsModelData") as ObservableModelData;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,7 +40,43 @@ namespace _6Sem_Lab2
                     return;
                 }
             }
-            (Resources["key_ObsModelData"] as ObservableModelData).Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
+            modelDatas.Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
+        }
+
+        private void CommandNew_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandOpen_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandSave_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandDelete_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            modelDatas.Remove_At(modelsList.SelectedIndex);
+        }
+
+        private void CommandSave_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (modelDatas != null)
+            {
+                e.CanExecute = modelDatas.HasChanged;
+            }
+        }
+
+        private void CommandDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (modelsList != null)
+            {
+                e.CanExecute = (modelsList.SelectedIndex != -1);
+            }
         }
     }
 }
