@@ -22,6 +22,9 @@ namespace _6Sem_Lab2
     public partial class MainWindow : Window
     {
         ObservableModelData modelDatas = null;
+        public static RoutedCommand AddModelCommand = new RoutedCommand("AddModel", typeof(_6Sem_Lab2.MainWindow));
+        public static RoutedCommand DrawCommand = new RoutedCommand("Draw", typeof(_6Sem_Lab2.MainWindow));
+
         public MainWindow()
         {
             InitializeComponent();
@@ -71,12 +74,44 @@ namespace _6Sem_Lab2
             }
         }
 
-        private void CommandDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void isItemSelected_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (modelsList != null)
             {
                 e.CanExecute = (modelsList.SelectedIndex != -1);
             }
+        }
+
+        private void CommandAddModel_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (TryFindResource("key_DummyModel") is ModelData dummy_model_ref)
+                modelDatas.Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
+        }
+
+        private void CommandDraw_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandAddModel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (pInput == null || nodeCountInput == null)
+            {
+                e.CanExecute = false;
+                return;
+            }
+            pInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            nodeCountInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            ModelData dummy_model_ref = FindResource("key_DummyModel") as ModelData;
+            foreach (FrameworkElement child in newModelStack.Children)
+            {
+                if (Validation.GetHasError(child))
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+            }
+            e.CanExecute = true;
         }
     }
 }

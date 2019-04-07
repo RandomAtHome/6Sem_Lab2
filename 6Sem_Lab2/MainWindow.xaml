@@ -26,7 +26,13 @@
                         CanExecute="CommandSave_CanExecute"/>
         <CommandBinding Command="ApplicationCommands.Delete"
                         Executed="CommandDelete_Executed"
-                        CanExecute="CommandDelete_CanExecute"/>
+                        CanExecute="isItemSelected_CanExecute"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AddModelCommand}"
+                        Executed="CommandAddModel_Executed"
+                        CanExecute="CommandAddModel_CanExecute"/>
+        <CommandBinding Command="{x:Static local:MainWindow.DrawCommand}"
+                        Executed="CommandDraw_Executed"
+                        CanExecute="isItemSelected_CanExecute"/>
     </Window.CommandBindings>
     <Grid>
         <Menu Height="20" VerticalAlignment="Top">
@@ -36,17 +42,17 @@
                 <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
             </MenuItem>
             <MenuItem x:Name="menuItem" Header="_Edit" Width="100">
-                <MenuItem Header="_Add"/>
+                <MenuItem Header="_Add" Command="{x:Static local:MainWindow.AddModelCommand}"/>
                 <MenuItem Header="_Remove" Command="ApplicationCommands.Delete"/>
             </MenuItem>
-            <MenuItem Header="_Draw" Width="100"/>
+            <MenuItem Header="_Draw" Width="100" Command="{x:Static local:MainWindow.DrawCommand}"/>
         </Menu>
         <ToolBar Height="25" VerticalAlignment="Top" Margin="0,20,0,0">
             <Button Content="Open" Command="ApplicationCommands.Open"/>
             <Button Content="Save" Command="ApplicationCommands.Save"/>
-            <Button Content="Add"/>
+            <Button Content="Add" Command="{x:Static local:MainWindow.AddModelCommand}"/>
             <Button Content="Remove" Command="ApplicationCommands.Delete"/>
-            <Button Content="Draw"/>
+            <Button Content="Draw" Command="{x:Static local:MainWindow.DrawCommand}"/>
         </ToolBar>
         <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="220" Margin="10,45,0,0" VerticalAlignment="Top" Width="540">
             <Charting:Chart x:Name="chart"/>
@@ -55,7 +61,7 @@
         <StackPanel x:Name="newModelStack" HorizontalAlignment="Left" Height="140" Margin="10,270,0,0" VerticalAlignment="Top" Width="140">
             <TextBox Height="23" TextWrapping="Wrap" x:Name="pInput" Text="{Binding Path=Parameter, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
             <TextBox Height="23" TextWrapping="Wrap" x:Name="nodeCountInput" Text="{Binding Path=NodeCount, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
-            <Button Content="Button" Click="Button_Click"/>
+            <Button Content="Button" Command="{x:Static local:MainWindow.AddModelCommand}"/>
         </StackPanel>
         <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
