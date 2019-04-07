@@ -60,6 +60,9 @@
         </ToolBar>
         <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="416" Margin="10,45,0,0" VerticalAlignment="Top" Width="740">
             <Charting:Chart x:Name="chart">
+                <Charting:Chart.Legends>
+                    <Charting:Legend Name="notScaledLegend"/>
+                </Charting:Chart.Legends>
                 <Charting:Chart.ChartAreas>
                     <Charting:ChartArea Name="notScaledArea"/>
                     <Charting:ChartArea Name="scaledArea"/>

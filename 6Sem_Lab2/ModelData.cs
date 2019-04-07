@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace _6Sem_Lab2
 {
@@ -10,7 +11,7 @@ namespace _6Sem_Lab2
         static double pMax = 2.0;
         void F(int n, double p)
         {
-            NodeValues[n] = (1.0 / (NodeCount - 1) * n) * (1.0 / (NodeCount - 1) * n) * p;
+            NodeValues[n] = Nodes[n] * Nodes[n] * p;
         }
 
         public int NodeCount { get; set; }
@@ -66,8 +67,22 @@ namespace _6Sem_Lab2
         public double[] XinBounds(double x1, double x2) => (from node in Nodes
                                                             where x1 < node && node < x2
                                                             select node) as double[];
-        public double[] YinBounds(double x1, double x2) => (from nodeVal in NodeValues
-                                                            where x1 < nodeVal && nodeVal < x2
-                                                            select nodeVal) as double[];
+        public double[] YinBounds(double x1, double x2)
+        {
+            List<double> answ = new List<double>();
+            for (int i = 0; i < NodeCount; i++)
+            {
+                if (Nodes[i] > x2)
+                {
+                    break;
+                }
+                if (Nodes[i] < x1)
+                {
+                    continue;
+                }
+                answ.Add(NodeValues[i]);
+            }
+            return answ.ToArray();
+        }
     }
 }
