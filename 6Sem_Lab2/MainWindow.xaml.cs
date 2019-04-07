@@ -21,29 +21,14 @@ namespace _6Sem_Lab2
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableModelData modelDatas = null;
+        ModelDataView dataView = null;
         public static RoutedCommand AddModelCommand = new RoutedCommand("AddModel", typeof(_6Sem_Lab2.MainWindow));
         public static RoutedCommand DrawCommand = new RoutedCommand("Draw", typeof(_6Sem_Lab2.MainWindow));
 
         public MainWindow()
         {
             InitializeComponent();
-            modelDatas = FindResource("key_ObsModelData") as ObservableModelData;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            pInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            nodeCountInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            ModelData dummy_model_ref = FindResource("key_DummyModel") as ModelData;
-            foreach (FrameworkElement child in newModelStack.Children)
-            {
-                if (Validation.GetHasError(child))
-                {
-                    return;
-                }
-            }
-            modelDatas.Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
+            dataView = new ModelDataView(FindResource("key_ObsModelData") as ObservableModelData);
         }
 
         private void CommandNew_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -63,14 +48,14 @@ namespace _6Sem_Lab2
 
         private void CommandDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            modelDatas.Remove_At(modelsList.SelectedIndex);
+            dataView.modelDatas.Remove_At(modelsList.SelectedIndex);
         }
 
         private void CommandSave_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (modelDatas != null)
+            if (dataView != null)
             {
-                e.CanExecute = modelDatas.HasChanged;
+                e.CanExecute = dataView.modelDatas.HasChanged;
             }
         }
 
@@ -85,12 +70,12 @@ namespace _6Sem_Lab2
         private void CommandAddModel_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (TryFindResource("key_DummyModel") is ModelData dummy_model_ref)
-                modelDatas.Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
+                dataView.modelDatas.Add_ModelData(new ModelData(dummy_model_ref.NodeCount, dummy_model_ref.Parameter));
         }
 
         private void CommandDraw_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            dataView.Draw(chart, dataView.modelDatas[modelsList.SelectedIndex], dataView.modelDatas.Farthest(modelsList.SelectedIndex));
         }
 
         private void CommandAddModel_CanExecute(object sender, CanExecuteRoutedEventArgs e)

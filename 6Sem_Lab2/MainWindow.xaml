@@ -60,16 +60,16 @@
         </ToolBar>
         <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="220" Margin="10,45,0,0" VerticalAlignment="Top" Width="540">
             <Charting:Chart x:Name="chart">
-                <Charting:Chart.Series>
-                    <Charting:Series Color="DarkRed" ChartType="Spline"/>
-                    <Charting:Series Color="DarkGreen" ChartType="Spline"/>
-                    <Charting:Series Color="DarkRed" ChartType="Spline" MarkerStyle="Circle" MarkerSize="5"/>
-                    <Charting:Series Color="DarkGreen" ChartType="Spline" MarkerStyle="Diamond" MarkerSize="5"/>
-                </Charting:Chart.Series>
                 <Charting:Chart.ChartAreas>
-                    <Charting:ChartArea x:Name="notScaledArea"/>
-                    <Charting:ChartArea x:Name="scaledArea"/>
+                    <Charting:ChartArea Name="notScaledArea"/>
+                    <Charting:ChartArea Name="scaledArea"/>
                 </Charting:Chart.ChartAreas>
+                <Charting:Chart.Series>
+                    <Charting:Series Name="md1NotScaled" Color="DarkRed" ChartType="Spline" ChartArea="notScaledArea"/>
+                    <Charting:Series Name="md2NotScaled" Color="DarkGreen" ChartType="Spline" ChartArea="notScaledArea"/>
+                    <Charting:Series Name="md1Scaled" Color="DarkRed" ChartType="Spline" ChartArea="scaledArea" MarkerStyle="Circle" MarkerSize="5"/>
+                    <Charting:Series Name="md2Scaled" Color="DarkGreen" ChartType="Spline" ChartArea="scaledArea" MarkerStyle="Diamond" MarkerSize="5"/>
+                </Charting:Chart.Series>
             </Charting:Chart>
         </WindowsFormsHost>
         <ListBox x:Name="modelsList" ItemsSource="{Binding}" ItemTemplate="{DynamicResource key_Template}" HorizontalAlignment="Left" Height="365" Margin="555,45,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True"/>

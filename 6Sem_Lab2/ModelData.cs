@@ -7,10 +7,10 @@ namespace _6Sem_Lab2
     class ModelData : IDataErrorInfo
     {
         static double pMin = 0.0;
-        static double pMax = 0.0;
+        static double pMax = 2.0;
         void F(int n, double p)
         {
-            NodeValues[n] = 1.0 / (NodeCount - 1) * p * n;
+            NodeValues[n] = (1.0 / (NodeCount - 1) * n) * (1.0 / (NodeCount - 1) * n) * p;
         }
 
         public int NodeCount { get; set; }
