@@ -19,7 +19,7 @@ namespace _6Sem_Lab2
 
         public void AddDefaults()
         {
-            Add_ModelData(new ModelData(1, 2));
+            Add_ModelData(new ModelData(10, 2));
             Add_ModelData(new ModelData(3, 2));
             Add_ModelData(new ModelData(24, 2));
             Add_ModelData(new ModelData(24, 5));

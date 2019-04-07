@@ -98,5 +98,7 @@ namespace _6Sem_Lab2
             }
             e.CanExecute = true;
         }
+
+        private void addDefaults_Click(object sender, RoutedEventArgs e) => dataView.modelDatas.AddDefaults();
     }
 }

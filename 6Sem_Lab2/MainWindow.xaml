@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_6Sem_Lab2"
         xmlns:Charting="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization" x:Class="_6Sem_Lab2.MainWindow"
         mc:Ignorable="d"
-        Title="Lab #2 Chukharev 301" Height="450" Width="800"
+        Title="Lab #2 Chukharev 301" Height="600" Width="1000"
         DataContext="{DynamicResource key_ObsModelData}">
     <Window.Resources>
         <local:ObservableModelData x:Key="key_ObsModelData"/>
@@ -58,7 +58,7 @@
             <Button Content="Remove" Command="ApplicationCommands.Delete"/>
             <Button Content="Draw" Command="{x:Static local:MainWindow.DrawCommand}"/>
         </ToolBar>
-        <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="220" Margin="10,45,0,0" VerticalAlignment="Top" Width="540">
+        <WindowsFormsHost x:Name="winChartHost" HorizontalAlignment="Left" Height="416" Margin="10,45,0,0" VerticalAlignment="Top" Width="740">
             <Charting:Chart x:Name="chart">
                 <Charting:Chart.ChartAreas>
                     <Charting:ChartArea Name="notScaledArea"/>
@@ -72,14 +72,15 @@
                 </Charting:Chart.Series>
             </Charting:Chart>
         </WindowsFormsHost>
-        <ListBox x:Name="modelsList" ItemsSource="{Binding}" ItemTemplate="{DynamicResource key_Template}" HorizontalAlignment="Left" Height="365" Margin="555,45,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True"/>
-        <StackPanel x:Name="newModelStack" HorizontalAlignment="Left" Height="140" Margin="10,270,0,0" VerticalAlignment="Top" Width="140">
+        <ListBox x:Name="modelsList" ItemsSource="{Binding}" ItemTemplate="{DynamicResource key_Template}" HorizontalAlignment="Left" Height="515" Margin="755,45,0,0" VerticalAlignment="Top" Width="227" IsSynchronizedWithCurrentItem="True" RenderTransformOrigin="1.176,0.468"/>
+        <StackPanel x:Name="newModelStack" HorizontalAlignment="Left" Height="94" Margin="10,466,0,0" VerticalAlignment="Top" Width="140">
             <TextBox Height="23" TextWrapping="Wrap" x:Name="pInput" Text="{Binding Path=Parameter, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
             <TextBox Height="23" TextWrapping="Wrap" x:Name="nodeCountInput" Text="{Binding Path=NodeCount, Source={StaticResource key_DummyModel}, ValidatesOnDataErrors=True}"/>
             <Button Content="Add new ModelData" Command="{x:Static local:MainWindow.AddModelCommand}"/>
+            <Button Content="Add defaults" Click="addDefaults_Click"/>
         </StackPanel>
-        <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,466,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.481,4.188"/>
+        <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,466,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
