@@ -88,7 +88,6 @@ namespace _6Sem_Lab2
             }
             pInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             nodeCountInput.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            ModelData dummy_model_ref = FindResource("key_DummyModel") as ModelData;
             foreach (FrameworkElement child in newModelStack.Children)
             {
                 if (Validation.GetHasError(child))
@@ -101,5 +100,24 @@ namespace _6Sem_Lab2
         }
 
         private void addDefaults_Click(object sender, RoutedEventArgs e) => dataView.modelDatas.AddDefaults();
+
+        private void CommandDraw_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (modelsList != null)
+            {
+                e.CanExecute = (modelsList.SelectedIndex != -1);
+            }
+            if (e.CanExecute && boundsStack != null)
+            {
+                foreach (FrameworkElement child in boundsStack.Children)
+                {
+                    if (Validation.GetHasError(child))
+                    {
+                        e.CanExecute = false;
+                        return;
+                    }
+                }
+            }
+        }
     }
 }
