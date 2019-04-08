@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace _6Sem_Lab2
 {
+    [Serializable]
     class ModelData : IDataErrorInfo
     {
         static double pMin = -10.0;

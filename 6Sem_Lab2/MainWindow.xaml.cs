@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Specialized;
 
 namespace _6Sem_Lab2
 {
@@ -34,17 +37,57 @@ namespace _6Sem_Lab2
 
         private void CommandNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            if (dataView.modelDatas.HasChanged)
+            {
+                MessageBoxResult res = MessageBox.Show("Do you want to save changes?", "Warning", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    CommandSave_Executed(this, null);
+                }
+            }
+            Resources["key_ObsModelData"] = new ObservableModelData();
+            dataView.modelDatas = FindResource("key_ObsModelData") as ObservableModelData;
         }
 
         private void CommandOpen_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            if (dataView.modelDatas.HasChanged)
+            {
+                MessageBoxResult res = MessageBox.Show("Do you want to save changes?", "Warning", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    CommandSave_Executed(this, null);
+                }
+            }
+            var dg = new Microsoft.Win32.OpenFileDialog();
+            if (dg.ShowDialog() == true)
+            {
+                try
+                {
+                    Load(dg.FileName);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Failed to open file!");
+                }
+            }
         }
 
         private void CommandSave_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            var dg = new Microsoft.Win32.SaveFileDialog();
+            if (dg.ShowDialog() == true)
+            {
+                try
+                {
+                    dataView.modelDatas.HasChanged = false;
+                    Save(dg.FileName);
+                }
+                catch (Exception)
+                {
+                    System.Windows.MessageBox.Show("Failed to save file!");
+                }
+            }
         }
 
         private void CommandDelete_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -118,6 +161,64 @@ namespace _6Sem_Lab2
                     }
                 }
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (dataView.modelDatas.HasChanged)
+            {
+                MessageBoxResult res = MessageBox.Show("Do you want to save changes?", "Warning", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    CommandSave_Executed(this, null);
+                }
+            }
+        }
+
+        public bool Save(string filename)
+        {
+            FileStream fs = null;
+            bool res = false;
+            try
+            {
+                fs = File.Create(filename);
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fs, dataView.modelDatas);
+                res = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception: " + ex.Message);
+            }
+            finally
+            {
+                if (fs != null) fs.Close();
+            }
+            return res;
+        }
+
+        public bool Load(string filename)
+        {
+            bool result = false;
+            FileStream fs = null;
+            try
+            {
+                fs = File.OpenRead(filename);
+                BinaryFormatter bf = new BinaryFormatter();
+                Resources["key_ObsModelData"] = bf.Deserialize(fs) as ObservableModelData;
+                dataView.modelDatas = FindResource("key_ObsModelData") as ObservableModelData;
+                dataView.modelDatas.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => dataView.modelDatas.HasChanged = true;
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception: " + ex.Message);
+            }
+            finally
+            {
+                if (fs != null) fs.Close();
+            }
+            return result;
         }
     }
 }

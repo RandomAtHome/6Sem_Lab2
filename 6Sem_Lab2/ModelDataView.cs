@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace _6Sem_Lab2
 {
+    [Serializable]
     class ModelDataView : IDataErrorInfo
     {
         public ObservableModelData modelDatas = null;

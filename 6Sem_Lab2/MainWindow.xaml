@@ -7,6 +7,7 @@
         xmlns:Charting="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization" x:Class="_6Sem_Lab2.MainWindow"
         mc:Ignorable="d"
         Title="Lab #2 Chukharev 301" Height="600" Width="1000"
+        Closed="Window_Closed"
         DataContext="{DynamicResource key_ObsModelData}">
     <Window.Resources>
         <local:ObservableModelData x:Key="key_ObsModelData"/>

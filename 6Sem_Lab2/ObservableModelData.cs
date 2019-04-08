@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace _6Sem_Lab2
 {
+    [Serializable]
     class ObservableModelData : ObservableCollection<ModelData>
     {
         private bool _hasChanged;
 
+        public ObservableModelData()
+        {
+            CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => HasChanged = true;
+        }
         public bool HasChanged {
             get => _hasChanged;
             set => _hasChanged = value;
