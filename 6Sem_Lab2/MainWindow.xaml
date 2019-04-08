@@ -82,8 +82,11 @@
             <Button Content="Add new ModelData" Command="{x:Static local:MainWindow.AddModelCommand}"/>
             <Button Content="Add defaults" Click="addDefaults_Click"/>
         </StackPanel>
-        <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" Margin="155,466,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" Margin="280,466,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <StackPanel Margin="155,466,592,72" Orientation="Horizontal" x:Name="boundsStack">
+            <TextBox x:Name="leftBound" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path=X1, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="rightBound" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path=X2, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"/>
+
+        </StackPanel>
 
     </Grid>
 </Window>

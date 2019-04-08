@@ -29,6 +29,7 @@ namespace _6Sem_Lab2
         {
             InitializeComponent();
             dataView = new ModelDataView(FindResource("key_ObsModelData") as ObservableModelData);
+            boundsStack.DataContext = dataView;
         }
 
         private void CommandNew_Executed(object sender, ExecutedRoutedEventArgs e)

@@ -65,8 +65,8 @@ namespace _6Sem_Lab2
         }
 
         public double[] XinBounds(double x1, double x2) => (from node in Nodes
-                                                            where x1 < node && node < x2
-                                                            select node) as double[];
+                                                            where x1 <= node && node <= x2
+                                                            select node).ToArray();
         public double[] YinBounds(double x1, double x2)
         {
             List<double> answ = new List<double>();

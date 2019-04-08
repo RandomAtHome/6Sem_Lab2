@@ -6,8 +6,11 @@ namespace _6Sem_Lab2
     class ModelDataView : IDataErrorInfo
     {
         public ObservableModelData modelDatas = null;
-        public double X1 { get; set; }
-        public double X2 { get; set; }
+        private double _x1 = 0.0;
+        private double _x2 = 1.0;
+
+        public double X1 { get => _x1; set => _x1 = value; }
+        public double X2 { get => _x2; set => _x2 = value; }
 
         public string Error => throw new System.NotImplementedException();
 
