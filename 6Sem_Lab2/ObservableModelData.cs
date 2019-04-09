@@ -29,6 +29,9 @@ namespace _6Sem_Lab2
             Add_ModelData(new ModelData(3, 2));
             Add_ModelData(new ModelData(24, 3));
             Add_ModelData(new ModelData(24, 5));
+            Add_ModelData(new ModelData(50, 0));
+            Add_ModelData(new ModelData(100, 5));
+            Add_ModelData(new ModelData(24, -6));
         }
 
         public ModelData Farthest(int index) => (from item in Items

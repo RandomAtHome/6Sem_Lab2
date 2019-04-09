@@ -12,7 +12,8 @@ namespace _6Sem_Lab2
         static double pMax = 10.0;
         void F(int n, double p)
         {
-            NodeValues[n] = Nodes[n] * Nodes[n] * p;
+            NodeValues[n] = Math.Sin(p * Math.PI * Nodes[n]);
+            //NodeValues[n] = Nodes[n] * Nodes[n] * p;
         }
 
         public int NodeCount { get; set; }

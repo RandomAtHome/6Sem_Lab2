@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Specialized;

@@ -57,10 +57,10 @@ namespace _6Sem_Lab2
 
         public void Draw(Chart chart, ModelData md1, ModelData md2)
         {
-            chart.ChartAreas["notScaledArea"].AxisX.LabelStyle.Format = "#.###";
-            chart.ChartAreas["notScaledArea"].AxisY.LabelStyle.Format = "#.###";
-            chart.ChartAreas["scaledArea"].AxisX.LabelStyle.Format = "#.###";
-            chart.ChartAreas["scaledArea"].AxisY.LabelStyle.Format = "#.###";
+            chart.ChartAreas["notScaledArea"].AxisX.LabelStyle.Format = "F3";
+            chart.ChartAreas["notScaledArea"].AxisY.LabelStyle.Format = "F3";
+            chart.ChartAreas["scaledArea"].AxisX.LabelStyle.Format = "F3";
+            chart.ChartAreas["scaledArea"].AxisY.LabelStyle.Format = "F3";
             Series series1 = chart.Series["md1NotScaled"];
             Series series2 = chart.Series["md2NotScaled"];
             series1.Points.DataBindXY(md1.Nodes, md1.NodeValues);
